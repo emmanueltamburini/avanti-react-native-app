@@ -7,7 +7,7 @@ import {ThemeContext} from '../context/Theme/ThemeContext';
 
 export type RootStackParams = {
   CategoriesScreen: undefined;
-  ProductsScreen: undefined;
+  ProductsScreen: {id: string};
 };
 
 const Stack = createStackNavigator<RootStackParams>();

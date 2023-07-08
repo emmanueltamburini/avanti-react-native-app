@@ -25,7 +25,7 @@ export const CategoryCard = ({item}: Props) => {
   return (
     <TouchableOpacity
       activeOpacity={0.9}
-      onPress={() => navigate('ProductsScreen')}>
+      onPress={() => navigate('ProductsScreen', {id: item.node.id})}>
       <View style={styles.cardContainer}>
         <View style={styles.leftContainer}>
           <ThemeText style={styles.name} ignoreTheme>

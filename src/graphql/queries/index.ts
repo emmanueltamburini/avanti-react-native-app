@@ -20,9 +20,9 @@ export const GET_COLLECTION = gql`
   }
 `;
 
-export const GET_PRODUCT_BY_COLLECTION = (id: string, page: number = 20) => gql`
-  {
-    collection(id: "${id}") {
+export const GET_PRODUCT_BY_COLLECTION = gql`
+  query getCollections($id: ID!, $quantity: Int!) {
+    collection(id: $id) {
       id
       handle
       title
@@ -31,7 +31,7 @@ export const GET_PRODUCT_BY_COLLECTION = (id: string, page: number = 20) => gql`
         id
         url
       }
-      products(first: ${page}) {
+      products(first: $quantity) {
         edges {
           node {
             id
