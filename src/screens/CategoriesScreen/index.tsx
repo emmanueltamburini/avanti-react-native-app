@@ -2,11 +2,11 @@ import React, {useContext} from 'react';
 import {View, StyleSheet, FlatList, ActivityIndicator} from 'react-native';
 import {ThemeContext} from '../../context/Theme/ThemeContext';
 import {globalStyles} from '../../theme/appTheme';
-import {HeaderTitle} from '../../components/HeaderTitle';
 import {useCollection} from '../../hooks/useCollection';
 import {Edge} from '../../interfaces/collectionInterfaces';
 import {LoadingComponent} from '../../components/LoadingComponent';
 import {CategoryCard} from '../../components/CategoryCard';
+import {LogoComponent} from '../../components/LogoComponent';
 
 export const CategoriesScreen = () => {
   const styles = stylesFunction();
@@ -25,7 +25,7 @@ export const CategoriesScreen = () => {
     <View style={styles.container}>
       <View style={styles.flatListContainer}>
         <FlatList
-          ListHeaderComponent={<HeaderTitle title="Avanti" />}
+          ListHeaderComponent={<LogoComponent />}
           data={collections}
           renderItem={({item}) => renderItem(item)}
           keyExtractor={item => item.node.id}
