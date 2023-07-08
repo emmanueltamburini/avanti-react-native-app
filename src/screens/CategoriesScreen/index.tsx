@@ -10,13 +10,22 @@ import {ThemeContext} from '../../context/Theme/ThemeContext';
 import {ThemeText} from '../../components/ThemeComponents/ThemeText';
 import {globalStyles} from '../../theme/appTheme';
 import {HeaderTitle} from '../../components/HeaderTitle';
+import {useCollection} from '../../hooks/useCollection';
+import {Edge} from '../../interfaces/collectionInterfaces';
+import {LoadingComponent} from '../../components/LoadingComponent';
 
 export const CategoriesScreen = () => {
   const styles = stylesFunction();
   const {theme} = useContext(ThemeContext);
-  //const {simplePokemonList, loadPokemons} = usePokemonPaginated();
+  const {collections, fetchMore, loading} = useCollection({
+    quantity: 4,
+    pagination: 4,
+  });
+  const renderItem = (item: Edge) => <ThemeText>{item?.node?.title}</ThemeText>;
 
-  const renderItem = () => <ThemeText>CategoriesScreen</ThemeText>;
+  if (loading) {
+    return <LoadingComponent />;
+  }
 
   return (
     <View style={styles.container}>
@@ -29,13 +38,13 @@ export const CategoriesScreen = () => {
       <View style={styles.flatListContainer}>
         <FlatList
           ListHeaderComponent={<HeaderTitle title="Avanti" />}
-          data={[] /* simplePokemonList */}
-          renderItem={() => renderItem()}
-          /* keyExtractor={pokemon => pokemon.id} */
-          /* onEndReached={loadPokemons} */
+          data={collections}
+          renderItem={({item}) => renderItem(item)}
+          keyExtractor={item => item.node.id}
+          onEndReached={fetchMore}
           onEndReachedThreshold={0.4}
           showsVerticalScrollIndicator={false}
-          numColumns={2}
+          numColumns={1}
           ListFooterComponent={
             <ActivityIndicator
               style={styles.activityIndicator}
