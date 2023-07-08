@@ -3,7 +3,7 @@ import {View} from 'react-native';
 import {stylesFunction} from './styles';
 import {ThemeText} from '../../components/ThemeComponents/ThemeText';
 
-export const ProductScreen = () => {
+export const ProductsScreen = () => {
   const styles = stylesFunction();
 
   return (

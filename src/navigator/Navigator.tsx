@@ -1,13 +1,13 @@
 import React, {useContext} from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
 import {CategoriesScreen} from '../screens/CategoriesScreen';
-import {ProductScreen} from '../screens/ProductScreen';
+import {ProductsScreen} from '../screens/ProductsScreen';
 import {NavigationContainer} from '@react-navigation/native';
 import {ThemeContext} from '../context/Theme/ThemeContext';
 
 export type RootStackParams = {
   CategoriesScreen: undefined;
-  ProductScreen: undefined;
+  ProductsScreen: undefined;
 };
 
 const Stack = createStackNavigator<RootStackParams>();
@@ -23,7 +23,7 @@ export const Navigator = () => {
           headerShown: false,
         }}>
         <Stack.Screen name="CategoriesScreen" component={CategoriesScreen} />
-        <Stack.Screen name="ProductScreen" component={ProductScreen} />
+        <Stack.Screen name="ProductsScreen" component={ProductsScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );

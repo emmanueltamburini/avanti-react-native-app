@@ -7,21 +7,21 @@ import {
   ActivityIndicator,
 } from 'react-native';
 import {ThemeContext} from '../../context/Theme/ThemeContext';
-import {ThemeText} from '../../components/ThemeComponents/ThemeText';
 import {globalStyles} from '../../theme/appTheme';
 import {HeaderTitle} from '../../components/HeaderTitle';
 import {useCollection} from '../../hooks/useCollection';
 import {Edge} from '../../interfaces/collectionInterfaces';
 import {LoadingComponent} from '../../components/LoadingComponent';
+import {CategoryCard} from '../../components/CategoryCard';
 
 export const CategoriesScreen = () => {
   const styles = stylesFunction();
   const {theme} = useContext(ThemeContext);
   const {collections, fetchMore, loading} = useCollection({
-    quantity: 4,
-    pagination: 4,
+    quantity: 10,
+    pagination: 10,
   });
-  const renderItem = (item: Edge) => <ThemeText>{item?.node?.title}</ThemeText>;
+  const renderItem = (item: Edge) => <CategoryCard item={item} />;
 
   if (loading) {
     return <LoadingComponent />;
