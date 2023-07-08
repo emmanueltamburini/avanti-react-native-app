@@ -5,33 +5,35 @@ import {GET_COLLECTION} from '../graphql/queries';
 
 interface Props {
   quantity: number;
-  pagination: number;
 }
 
-export const useCollection = ({quantity, pagination}: Props) => {
-  const [elementFetch, setElementFetch] = useState(quantity);
+export const useCollection = ({quantity}: Props) => {
   const [collections, setCollections] = useState<Edge[]>([]);
   const {data, loading, refetch} = useQuery<CollectionResponse>(
     GET_COLLECTION,
     {
-      variables: {quantity: elementFetch},
+      variables: {after: null, quantity},
     },
   );
 
   useEffect(() => {
-    if (!loading && data?.collections) {
+    if (!loading && data?.collections && collections.length === 0) {
       setCollections(data?.collections.edges);
     }
-  }, [loading, data]);
+  }, [loading, data, collections]);
 
   const fetchMore = () => {
-    if (loading || elementFetch > collections.length) {
+    if (loading || !collections[collections.length - 1]) {
       return;
     }
-    refetch({quantity: elementFetch + pagination}).then(response => {
-      setCollections(response.data.collections.edges);
-      setElementFetch(elementFetch + pagination);
-    });
+    refetch({after: collections[collections.length - 1].cursor, quantity}).then(
+      response => {
+        setCollections(currentCollections => [
+          ...currentCollections,
+          ...response.data.collections.edges,
+        ]);
+      },
+    );
   };
 
   return {collections, loading, fetchMore};

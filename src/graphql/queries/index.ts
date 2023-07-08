@@ -1,8 +1,8 @@
 import {gql} from '@apollo/client';
 
 export const GET_COLLECTION = gql`
-  query getCollections($quantity: Int!) {
-    collections(first: $quantity) {
+  query getCollections($quantity: Int!, $after: String) {
+    collections(first: $quantity, after: $after) {
       edges {
         cursor
         node {

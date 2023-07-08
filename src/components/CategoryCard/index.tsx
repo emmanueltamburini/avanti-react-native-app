@@ -25,7 +25,12 @@ export const CategoryCard = ({item}: Props) => {
   return (
     <TouchableOpacity
       activeOpacity={0.9}
-      onPress={() => navigate('ProductsScreen', {id: item.node.id})}>
+      onPress={() =>
+        navigate('ProductsScreen', {
+          id: item.node.id,
+          categoryName: item.node.title,
+        })
+      }>
       <View style={styles.cardContainer}>
         <View style={styles.leftContainer}>
           <FadeInImage uri={item.node.image.url} style={styles.images} />

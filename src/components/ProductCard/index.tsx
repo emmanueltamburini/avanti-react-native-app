@@ -25,12 +25,6 @@ export const ProductCard = ({item}: Props) => {
         <ThemeText style={styles.name} ignoreTheme>
           {item.node.title}
         </ThemeText>
-        <ThemeText style={styles.name} ignoreTheme>
-          {item.node.title}
-        </ThemeText>
-        <ThemeText style={styles.name} ignoreTheme>
-          {item.node.title}
-        </ThemeText>
       </View>
     </View>
   );

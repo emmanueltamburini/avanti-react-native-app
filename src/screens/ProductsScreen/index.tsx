@@ -1,19 +1,24 @@
-import React, {useContext, useEffect, useState} from 'react';
-import {View, FlatList, useWindowDimensions} from 'react-native';
-import {SearchInput} from '../../components/SearchInput/SearchInput';
+import React, {useContext} from 'react';
+import {
+  View,
+  FlatList,
+  useWindowDimensions,
+  ActivityIndicator,
+} from 'react-native';
 import {useProducts} from '../../hooks/useProducts';
 import {LoadingComponent} from '../../components/LoadingComponent';
 import {Edge} from '../../interfaces/productInterfaces';
 import {StackScreenProps} from '@react-navigation/stack';
 import {RootStackParams} from '../../navigator/Navigator';
-import {TouchableIcon} from '../../components/TouchableIcon';
 import {stylesFunction} from './styles';
 import {ProductCard} from '../../components/ProductCard';
 import {ThemeContext} from '../../context/Theme/ThemeContext';
+import {HeaderTitle} from '../../components/HeaderTitle';
+import {TouchableIcon} from '../../components/TouchableIcon';
 
 interface Props extends StackScreenProps<RootStackParams, 'ProductsScreen'> {}
 export const ProductsScreen = ({route, navigation}: Props) => {
-  const {id} = route.params;
+  const {id, categoryName} = route.params;
   const dimensions = useWindowDimensions();
   const styles = stylesFunction(dimensions);
   const {theme} = useContext(ThemeContext);
@@ -23,56 +28,45 @@ export const ProductsScreen = ({route, navigation}: Props) => {
     id,
   });
 
-  const [searchTerm, setSearchTerm] = useState('');
-  const [productsFiltered, setProductsFiltered] = useState<Edge[]>(products);
-
-  useEffect(() => {
-    if (searchTerm.length === 0) {
-      return setProductsFiltered(products);
-    }
-
-    setProductsFiltered(
-      products.filter(item =>
-        item.node.title.toLowerCase().includes(searchTerm.toLowerCase()),
-      ),
-    );
-  }, [searchTerm, products]);
-
   const renderItem = (item: Edge) => <ProductCard item={item} />;
 
   if (loading) {
     return <LoadingComponent />;
   }
 
+  const headerComponent = () => (
+    <View style={styles.headerContainer}>
+      <TouchableIcon
+        activeOpacity={0.8}
+        onPress={() => navigation.popToTop()}
+        name="arrow-back-outline"
+        size={32}
+        color={theme.text}
+        style={styles.backButton}
+      />
+      <HeaderTitle title={categoryName} />
+    </View>
+  );
+
   return (
     <View style={styles.container}>
-      <View style={styles.headerContainer}>
-        <View style={styles.backContainer}>
-          <TouchableIcon
-            activeOpacity={0.8}
-            onPress={() => navigation.popToTop()}
-            name="arrow-back-outline"
-            size={32}
-            color={theme.text}
-          />
-        </View>
-        <View style={styles.searchContainer}>
-          <SearchInput
-            onDebounceChange={setSearchTerm}
-            style={styles.searchInput}
-          />
-        </View>
-      </View>
-      <View style={styles.resultContainer}>
+      <View style={styles.flatListContainer}>
         <FlatList
-          data={productsFiltered}
-          onEndReached={fetchMore}
-          onEndReachedThreshold={0.4}
+          ListHeaderComponent={headerComponent()}
+          data={products}
           renderItem={({item}) => renderItem(item)}
           keyExtractor={item => item.node.id}
+          onEndReached={fetchMore}
+          onEndReachedThreshold={0.4}
           showsVerticalScrollIndicator={false}
           numColumns={1}
-          contentContainerStyle={styles.contentContainer}
+          ListFooterComponent={
+            <ActivityIndicator
+              style={styles.activityIndicator}
+              size={20}
+              color={theme.opacityColor}
+            />
+          }
         />
       </View>
     </View>

@@ -7,19 +7,24 @@ export const stylesFunction = (dimensions: ScaledSize) =>
       flex: 1,
       alignItems: 'center',
     },
-    headerContainer: {
-      flex: bigWidthScreen(dimensions) ? 2 : 1,
-      flexDirection: 'row',
-      minHeight: bigWidthScreen(dimensions) ? 0 : 20,
-      marginBottom: 10,
+    flatListContainer: {
+      alignItems: 'center',
     },
-    backContainer: {
+    activityIndicator: {
+      height: 100,
+    },
+    headerContainer: {
       flex: 1,
-      paddingLeft: 5,
+      marginBottom: 10,
       alignItems: 'center',
       justifyContent: 'center',
     },
-    searchContainer: {
+    backButton: {
+      position: 'absolute',
+      top: 30,
+      left: -5,
+    },
+    titleContainer: {
       flex: bigWidthScreen(dimensions) ? 15 : 8,
       alignItems: 'center',
       justifyContent: 'center',

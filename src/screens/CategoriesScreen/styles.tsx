@@ -7,4 +7,10 @@ export const stylesFunction = () =>
       flex: 1,
       ...globalStyles().globalMargin,
     },
+    flatListContainer: {
+      alignItems: 'center',
+    },
+    activityIndicator: {
+      height: 100,
+    },
   });
