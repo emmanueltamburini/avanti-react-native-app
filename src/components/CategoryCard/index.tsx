@@ -28,12 +28,12 @@ export const CategoryCard = ({item}: Props) => {
       onPress={() => navigate('ProductsScreen', {id: item.node.id})}>
       <View style={styles.cardContainer}>
         <View style={styles.leftContainer}>
+          <FadeInImage uri={item.node.image.url} style={styles.images} />
+        </View>
+        <View style={styles.rightContainer}>
           <ThemeText style={styles.name} ignoreTheme>
             {item.node.title}
           </ThemeText>
-        </View>
-        <View style={styles.rightContainer}>
-          <FadeInImage uri={item.node.image.url} style={styles.images} />
         </View>
       </View>
     </TouchableOpacity>

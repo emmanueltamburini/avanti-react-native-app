@@ -19,12 +19,18 @@ export const ProductCard = ({item}: Props) => {
   return (
     <View style={styles.cardContainer}>
       <View style={styles.leftContainer}>
+        <FadeInImage uri={item.node.featuredImage.url} style={styles.images} />
+      </View>
+      <View style={styles.rightContainer}>
         <ThemeText style={styles.name} ignoreTheme>
           {item.node.title}
         </ThemeText>
-      </View>
-      <View style={styles.rightContainer}>
-        <FadeInImage uri={item.node.featuredImage.url} style={styles.images} />
+        <ThemeText style={styles.name} ignoreTheme>
+          {item.node.title}
+        </ThemeText>
+        <ThemeText style={styles.name} ignoreTheme>
+          {item.node.title}
+        </ThemeText>
       </View>
     </View>
   );

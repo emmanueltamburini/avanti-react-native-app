@@ -3,6 +3,7 @@ import {StyleSheet} from 'react-native';
 export const stylesFunction = () =>
   StyleSheet.create({
     container: {
-      height: 100,
+      height: 85,
+      marginBottom: 15,
     },
   });

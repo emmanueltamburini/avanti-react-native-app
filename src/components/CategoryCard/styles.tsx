@@ -34,18 +34,19 @@ export const stylesFunction = (
     name: {
       fontSize: 18,
       fontWeight: 'bold',
-      top: 10,
-      left: 10,
+      alignSelf: 'flex-end',
+      paddingEnd: 15,
+      paddingTop: 15,
     },
     leftContainer: {
-      backgroundColor: theme.primary,
       flex: 1,
+      overflow: 'hidden',
       borderTopLeftRadius: 20,
       borderBottomLeftRadius: 20,
     },
     rightContainer: {
       flex: 1,
-      overflow: 'hidden',
+      backgroundColor: theme.primary,
       borderTopRightRadius: 20,
       borderBottomRightRadius: 20,
     },
