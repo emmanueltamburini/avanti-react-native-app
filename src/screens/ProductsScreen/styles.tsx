@@ -11,6 +11,7 @@ export const stylesFunction = (dimensions: ScaledSize) =>
       flex: bigWidthScreen(dimensions) ? 2 : 1,
       flexDirection: 'row',
       minHeight: bigWidthScreen(dimensions) ? 0 : 20,
+      marginBottom: 10,
     },
     backContainer: {
       flex: 1,

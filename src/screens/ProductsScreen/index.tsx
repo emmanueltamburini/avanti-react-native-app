@@ -1,7 +1,6 @@
-import React, {useEffect, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import {View, FlatList, useWindowDimensions} from 'react-native';
 import {SearchInput} from '../../components/SearchInput/SearchInput';
-import {HeaderTitle} from '../../components/HeaderTitle';
 import {useProducts} from '../../hooks/useProducts';
 import {LoadingComponent} from '../../components/LoadingComponent';
 import {Edge} from '../../interfaces/productInterfaces';
@@ -10,12 +9,14 @@ import {RootStackParams} from '../../navigator/Navigator';
 import {TouchableIcon} from '../../components/TouchableIcon';
 import {stylesFunction} from './styles';
 import {ProductCard} from '../../components/ProductCard';
+import {ThemeContext} from '../../context/Theme/ThemeContext';
 
 interface Props extends StackScreenProps<RootStackParams, 'ProductsScreen'> {}
 export const ProductsScreen = ({route, navigation}: Props) => {
   const {id} = route.params;
   const dimensions = useWindowDimensions();
-
+  const styles = stylesFunction(dimensions);
+  const {theme} = useContext(ThemeContext);
   const {fetchMore, loading, products} = useProducts({
     quantity: 10,
     pagination: 10,
@@ -37,8 +38,6 @@ export const ProductsScreen = ({route, navigation}: Props) => {
     );
   }, [searchTerm, products]);
 
-  const styles = stylesFunction(dimensions);
-
   const renderItem = (item: Edge) => <ProductCard item={item} />;
 
   if (loading) {
@@ -54,6 +53,7 @@ export const ProductsScreen = ({route, navigation}: Props) => {
             onPress={() => navigation.popToTop()}
             name="arrow-back-outline"
             size={32}
+            color={theme.text}
           />
         </View>
         <View style={styles.searchContainer}>
@@ -65,14 +65,6 @@ export const ProductsScreen = ({route, navigation}: Props) => {
       </View>
       <View style={styles.resultContainer}>
         <FlatList
-          ListHeaderComponent={
-            searchTerm.length === 0 ? null : (
-              <HeaderTitle
-                title={`Searching: ${searchTerm}`}
-                style={styles.headerTitle}
-              />
-            )
-          }
           data={productsFiltered}
           onEndReached={fetchMore}
           onEndReachedThreshold={0.4}

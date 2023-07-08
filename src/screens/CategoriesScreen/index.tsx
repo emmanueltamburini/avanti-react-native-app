@@ -1,11 +1,5 @@
 import React, {useContext} from 'react';
-import {
-  View,
-  StyleSheet,
-  Image,
-  FlatList,
-  ActivityIndicator,
-} from 'react-native';
+import {View, StyleSheet, FlatList, ActivityIndicator} from 'react-native';
 import {ThemeContext} from '../../context/Theme/ThemeContext';
 import {globalStyles} from '../../theme/appTheme';
 import {HeaderTitle} from '../../components/HeaderTitle';
@@ -29,12 +23,6 @@ export const CategoriesScreen = () => {
 
   return (
     <View style={styles.container}>
-      <Image
-        source={{
-          uri: 'https://www.galeriaavanti.com/web/image/website/1/logo/AVANTI',
-        }}
-        style={globalStyles().avantiLogo}
-      />
       <View style={styles.flatListContainer}>
         <FlatList
           ListHeaderComponent={<HeaderTitle title="Avanti" />}

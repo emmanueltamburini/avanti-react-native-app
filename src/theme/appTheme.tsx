@@ -19,12 +19,4 @@ export const globalStyles = () =>
       shadowRadius: 7.49,
       elevation: 6,
     },
-    avantiLogo: {
-      top: -100,
-      right: -120,
-      opacity: 0.2,
-      position: 'absolute',
-      width: 300,
-      height: 300,
-    },
   });

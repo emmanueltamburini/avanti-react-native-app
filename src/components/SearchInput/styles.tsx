@@ -8,7 +8,9 @@ export const stylesFunction = (theme: ThemeState) =>
     },
     textBackground: {
       flexDirection: 'row',
-      backgroundColor: theme.background,
+      backgroundColor: theme.dark
+        ? theme.opacityContrastColor
+        : theme.background,
       borderRadius: 50,
       height: 40,
       paddingHorizontal: 20,
