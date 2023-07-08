@@ -1,21 +1,15 @@
 import React, {useEffect, useState} from 'react';
-import {
-  View,
-  StyleSheet,
-  FlatList,
-  useWindowDimensions,
-  ScaledSize,
-} from 'react-native';
+import {View, FlatList, useWindowDimensions} from 'react-native';
 import {SearchInput} from '../../components/SearchInput/SearchInput';
 import {HeaderTitle} from '../../components/HeaderTitle';
 import {useProducts} from '../../hooks/useProducts';
 import {LoadingComponent} from '../../components/LoadingComponent';
 import {Edge} from '../../interfaces/productInterfaces';
-import {ThemeText} from '../../components/ThemeComponents/ThemeText';
 import {StackScreenProps} from '@react-navigation/stack';
 import {RootStackParams} from '../../navigator/Navigator';
 import {TouchableIcon} from '../../components/TouchableIcon';
-import {bigWidthScreen} from '../../helpers/utils';
+import {stylesFunction} from './styles';
+import {ProductCard} from '../../components/ProductCard';
 
 interface Props extends StackScreenProps<RootStackParams, 'ProductsScreen'> {}
 export const ProductsScreen = ({route, navigation}: Props) => {
@@ -45,7 +39,7 @@ export const ProductsScreen = ({route, navigation}: Props) => {
 
   const styles = stylesFunction(dimensions);
 
-  const renderItem = (item: Edge) => <ThemeText>{item.node.title}</ThemeText>;
+  const renderItem = (item: Edge) => <ProductCard item={item} />;
 
   if (loading) {
     return <LoadingComponent />;
@@ -86,44 +80,9 @@ export const ProductsScreen = ({route, navigation}: Props) => {
           keyExtractor={item => item.node.id}
           showsVerticalScrollIndicator={false}
           numColumns={1}
+          contentContainerStyle={styles.contentContainer}
         />
       </View>
     </View>
   );
 };
-
-const stylesFunction = (dimensions: ScaledSize) =>
-  StyleSheet.create({
-    container: {
-      flex: 1,
-      marginVertical: 10,
-      alignItems: 'center',
-    },
-    headerContainer: {
-      flex: bigWidthScreen(dimensions) ? 2 : 1,
-      flexDirection: 'row',
-      minHeight: bigWidthScreen(dimensions) ? 0 : 20,
-    },
-    backContainer: {
-      flex: 1,
-      paddingLeft: 5,
-      alignItems: 'center',
-      justifyContent: 'center',
-    },
-    searchContainer: {
-      flex: bigWidthScreen(dimensions) ? 15 : 8,
-    },
-    resultContainer: {
-      flex: bigWidthScreen(dimensions) ? 8 : 12,
-      flexDirection: 'row',
-    },
-    searchInput: {
-      zIndex: 9999,
-      width: bigWidthScreen(dimensions) ? '90%' : '93%',
-    },
-    headerTitle: {
-      alignItems: 'center',
-      paddingHorizontal: 30,
-      fontSize: 15,
-    },
-  });

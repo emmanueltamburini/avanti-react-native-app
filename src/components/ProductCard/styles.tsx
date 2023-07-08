@@ -7,7 +7,6 @@ export const stylesFunction = (
 ) =>
   StyleSheet.create({
     cardContainer: {
-      backgroundColor: theme.background,
       marginHorizontal: 10,
       height: windowDimension.height * 0.2,
       width: windowDimension.width * 0.8,
@@ -23,6 +22,7 @@ export const stylesFunction = (
       elevation: 8,
       flexDirection: 'row',
       flex: 1,
+      maxHeight: 180,
     },
     images: {
       alignSelf: 'flex-end',
