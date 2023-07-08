@@ -9,12 +9,12 @@ import {useProducts} from '../../hooks/useProducts';
 import {LoadingComponent} from '../../components/LoadingComponent';
 import {Edge} from '../../interfaces/productInterfaces';
 import {StackScreenProps} from '@react-navigation/stack';
-import {RootStackParams} from '../../navigator/Navigator';
 import {stylesFunction} from './styles';
 import {ProductCard} from '../../components/ProductCard';
 import {ThemeContext} from '../../context/Theme/ThemeContext';
 import {HeaderTitle} from '../../components/HeaderTitle';
 import {TouchableIcon} from '../../components/TouchableIcon';
+import {RootStackParams} from '../../navigator/Tab1';
 
 interface Props extends StackScreenProps<RootStackParams, 'ProductsScreen'> {}
 export const ProductsScreen = ({route, navigation}: Props) => {

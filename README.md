@@ -16,6 +16,7 @@ This project use the following dependencies:
 
 - [React Navigation - Getting started](<https://reactnavigation.org/docs/getting-started/>)
 - [React Navigation - Stack navigator](<https://reactnavigation.org/docs/stack-navigator/>)
+- [React Navigation - Button tab navigator](<https://reactnavigation.org/docs/bottom-tab-navigator>)
 - [React Native Vector Icons](<https://github.com/oblador/react-native-vector-icons>)
 - [Apollo Client](<https://www.npmjs.com/package/@apollo/client>)
 - [React-native-svg](<https://www.npmjs.com/package/react-native-svg>)
