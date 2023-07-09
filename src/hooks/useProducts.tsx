@@ -6,33 +6,36 @@ import {ProductResponse, Edge} from '../interfaces/productInterfaces';
 interface Props {
   id: string;
   quantity: number;
-  pagination: number;
 }
 
-export const useProducts = ({id, quantity, pagination}: Props) => {
-  const [elementFetch, setElementFetch] = useState(quantity);
+export const useProducts = ({id, quantity}: Props) => {
   const [products, setProducts] = useState<Edge[]>([]);
   const {data, loading, refetch} = useQuery<ProductResponse>(
     GET_PRODUCT_BY_COLLECTION,
     {
-      variables: {id, quantity: elementFetch},
+      variables: {id, quantity},
     },
   );
 
   useEffect(() => {
-    if (!loading && data?.collection.products.edges) {
+    if (!loading && data?.collection?.products.edges && products.length === 0) {
       setProducts(data?.collection.products.edges);
     }
-  }, [loading, data]);
+  }, [loading, data, products]);
 
   const fetchMore = () => {
-    if (loading || elementFetch > products.length) {
+    console.log('=== useProducts.tsx [31] ===');
+    if (loading || !products[products.length - 1]) {
       return;
     }
-    refetch({quantity: elementFetch + pagination}).then(response => {
-      setProducts(response.data.collection.products.edges);
-      setElementFetch(elementFetch + pagination);
-    });
+    refetch({id, quantity, after: products[products.length - 1].cursor}).then(
+      response => {
+        setProducts(currentProducts => [
+          ...currentProducts,
+          ...response.data.collection.products.edges,
+        ]);
+      },
+    );
   };
 
   return {products, loading, fetchMore};

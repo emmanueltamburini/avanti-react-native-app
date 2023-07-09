@@ -21,6 +21,7 @@ export interface Products {
 }
 
 export interface Edge {
+  cursor: string;
   node: Node;
 }
 

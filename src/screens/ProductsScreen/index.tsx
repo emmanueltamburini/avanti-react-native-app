@@ -23,9 +23,8 @@ export const ProductsScreen = ({route, navigation}: Props) => {
   const styles = stylesFunction(dimensions);
   const {theme} = useContext(ThemeContext);
   const {fetchMore, loading, products} = useProducts({
-    quantity: 10,
-    pagination: 10,
     id,
+    quantity: 5,
   });
 
   const renderItem = (item: Edge) => <ProductCard item={item} />;
