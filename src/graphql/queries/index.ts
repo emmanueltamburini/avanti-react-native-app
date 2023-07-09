@@ -48,9 +48,10 @@ export const GET_PRODUCT_BY_COLLECTION = gql`
 `;
 
 export const GET_PRODUCT_BY_TITLE = gql`
-  query getProductsByTitle($query: String, $quantity: Int!) {
-    products(first: $quantity, query: $query) {
+  query getProductsByTitle($query: String, $quantity: Int!, $after: String) {
+    products(first: $quantity, query: $query, after: $after) {
       edges {
+        cursor
         node {
           id
           title

@@ -1,4 +1,4 @@
-import React, {useContext, useState} from 'react';
+import React, {useContext, useEffect, useRef, useState} from 'react';
 import {
   View,
   FlatList,
@@ -18,9 +18,21 @@ export const SearchProductsScreen = () => {
   const dimensions = useWindowDimensions();
   const styles = stylesFunction(dimensions);
   const {theme} = useContext(ThemeContext);
-  const {fetchMore, loading, products} = useSearchProducts({quantity: 10});
+  const {fetch, fetchMore, loading, products} = useSearchProducts({
+    quantity: 4,
+  });
+
+  const fetchStatic = useRef(fetch);
 
   const renderItem = (item: Edge) => <ProductCard item={item} />;
+
+  useEffect(() => {
+    if (searchTerm.length === 0) {
+      fetchStatic.current('**');
+      return;
+    }
+    fetchStatic.current(searchTerm);
+  }, [searchTerm]);
 
   if (loading) {
     return <LoadingComponent />;
@@ -39,7 +51,7 @@ export const SearchProductsScreen = () => {
           data={products}
           renderItem={({item}) => renderItem(item)}
           keyExtractor={item => item.node.id}
-          onEndReached={() => fetchMore('')}
+          onEndReached={() => fetchMore(searchTerm)}
           onEndReachedThreshold={0.4}
           showsVerticalScrollIndicator={false}
           numColumns={1}

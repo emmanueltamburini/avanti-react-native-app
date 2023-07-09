@@ -7,6 +7,7 @@ export interface Products {
 }
 
 export interface ProductsEdge {
+  cursor: string;
   node: PurpleNode;
 }
 

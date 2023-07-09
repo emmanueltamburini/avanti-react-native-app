@@ -15,7 +15,7 @@ export const useSearchProducts = ({quantity}: Props) => {
   const {data, loading, refetch} = useQuery<ProductSearchResponse>(
     GET_PRODUCT_BY_TITLE,
     {
-      variables: {quantity, query: 'title:**'},
+      variables: {quantity, query: 'title:**', after: null},
     },
   );
 
@@ -25,14 +25,29 @@ export const useSearchProducts = ({quantity}: Props) => {
     }
   }, [loading, data, products]);
 
+  const fetch = (title: string) => {
+    refetch({quantity, query: `title:${title}*`, after: null}).then(
+      response => {
+        setProducts(response.data.products.edges);
+      },
+    );
+  };
+
   const fetchMore = (title: string) => {
     if (loading || !products[products.length - 1]) {
       return;
     }
-    refetch({quantity, query: `title: "*${title}*"`}).then(response => {
-      setProducts(response.data.products.edges);
+    refetch({
+      after: products[products.length - 1].cursor,
+      quantity,
+      query: `title:${title}*"`,
+    }).then(response => {
+      setProducts(currentProducts => [
+        ...currentProducts,
+        ...response.data.products.edges,
+      ]);
     });
   };
 
-  return {products, loading, fetchMore};
+  return {products, loading, fetch, fetchMore};
 };
