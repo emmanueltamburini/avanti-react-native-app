@@ -21,7 +21,7 @@ export const GET_COLLECTION = gql`
 `;
 
 export const GET_PRODUCT_BY_COLLECTION = gql`
-  query getCollections($id: ID!, $quantity: Int!) {
+  query getProducts($id: ID!, $quantity: Int!) {
     collection(id: $id) {
       id
       handle
@@ -39,6 +39,34 @@ export const GET_PRODUCT_BY_COLLECTION = gql`
             featuredImage {
               id
               url
+            }
+          }
+        }
+      }
+    }
+  }
+`;
+
+export const GET_PRODUCT_BY_TITLE = gql`
+  query getProductsByTitle($query: String, $quantity: Int!) {
+    products(first: $quantity, query: $query) {
+      edges {
+        node {
+          id
+          title
+          description
+          featuredImage {
+            id
+            url
+          }
+          variants(first: 3) {
+            edges {
+              node {
+                price {
+                  amount
+                  currencyCode
+                }
+              }
             }
           }
         }

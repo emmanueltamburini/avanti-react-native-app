@@ -1,11 +1,9 @@
 import React from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
-import {CategoriesScreen} from '../screens/CategoriesScreen';
-import {ProductsScreen} from '../screens/ProductsScreen';
+import {SearchProductsScreen} from '../screens/SearchProductsScreen';
 
 export type RootStackParams = {
-  CategoriesScreen: undefined;
-  ProductsScreen: {id: string; categoryName: string};
+  SearchProductsScreen: undefined;
 };
 
 const Stack = createStackNavigator<RootStackParams>();
@@ -13,12 +11,14 @@ const Stack = createStackNavigator<RootStackParams>();
 export const Tab2 = () => {
   return (
     <Stack.Navigator
-      initialRouteName="CategoriesScreen"
+      initialRouteName="SearchProductsScreen"
       screenOptions={{
         headerShown: false,
       }}>
-      <Stack.Screen name="CategoriesScreen" component={CategoriesScreen} />
-      <Stack.Screen name="ProductsScreen" component={ProductsScreen} />
+      <Stack.Screen
+        name="SearchProductsScreen"
+        component={SearchProductsScreen}
+      />
     </Stack.Navigator>
   );
 };

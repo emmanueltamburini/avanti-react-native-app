@@ -4,10 +4,10 @@ import {StackNavigationProp} from '@react-navigation/stack';
 import {useNavigation} from '@react-navigation/native';
 import {ThemeText} from '../ThemeComponents/ThemeText';
 import {FadeInImage} from '../FadeInImage';
-import {RootStackParams} from '../../navigator/Navigator';
 import {Edge} from '../../interfaces/collectionInterfaces';
 import {ThemeContext} from '../../context/Theme/ThemeContext';
 import {stylesFunction} from './styles';
+import {RootStackParams} from '../../navigator/Tab1';
 
 interface Props {
   item: Edge;
