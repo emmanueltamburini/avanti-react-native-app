@@ -1,10 +1,15 @@
 import {StackScreenProps} from '@react-navigation/stack';
-import React from 'react';
-import {View, Text} from 'react-native';
+import React, {useContext} from 'react';
+import {View, useWindowDimensions} from 'react-native';
 import {RootStackParams as RootStackParamsTab1} from '../../navigator/Tab1';
 import {RootStackParams as RootStackParamsTab2} from '../../navigator/Tab2';
 import {useProduct} from '../../hooks/useProduct';
 import {LoadingComponent} from '../../components/LoadingComponent';
+import {ItemHeader} from '../../components/ItemHeader';
+import {ItemDetails} from '../../components/ItemDetails';
+import {stylesFunction} from './styles';
+import {useSafeAreaInsets} from 'react-native-safe-area-context';
+import {ThemeContext} from '../../context/Theme/ThemeContext';
 
 interface Props
   extends StackScreenProps<
@@ -12,17 +17,22 @@ interface Props
     'ProductScreen'
   > {}
 
-export const ProductScreen = ({navigation, route}: Props) => {
+export const ProductScreen = ({route}: Props) => {
   const {id} = route.params;
   const {loading, product} = useProduct({id});
+  const {top} = useSafeAreaInsets();
+  const dimensions = useWindowDimensions();
+  const {theme} = useContext(ThemeContext);
+  const styles = stylesFunction(theme, top, dimensions);
 
   if (loading) {
     return <LoadingComponent />;
   }
 
   return (
-    <View>
-      <Text>{product?.title}</Text>
+    <View style={styles.container}>
+      <ItemHeader product={product} />
+      <ItemDetails product={product} />
     </View>
   );
 };

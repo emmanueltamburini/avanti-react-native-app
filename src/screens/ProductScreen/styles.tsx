@@ -1,16 +1,19 @@
-import {StyleSheet} from 'react-native';
-import {globalStyles} from '../../theme/appTheme';
+import {ScaledSize, StyleSheet} from 'react-native';
+import {ThemeState} from '../../context/Theme/themeReducer';
 
-export const stylesFunction = () =>
+export const stylesFunction = (
+  theme: ThemeState,
+  top: number,
+  dimensions: ScaledSize,
+) =>
   StyleSheet.create({
     container: {
       flex: 1,
-      ...globalStyles().globalMargin,
-    },
-    flatListContainer: {
-      alignItems: 'center',
+      flexDirection: dimensions.width >= 650 ? 'row' : 'column',
     },
     activityIndicator: {
-      height: 100,
+      flex: 1,
+      justifyContent: 'center',
+      alignItems: 'center',
     },
   });
