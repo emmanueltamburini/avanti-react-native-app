@@ -76,3 +76,17 @@ export const GET_PRODUCT_BY_TITLE = gql`
     }
   }
 `;
+
+export const GET_PRODUCT_BY_ID = gql`
+  query getProductsByTitle($id: ID!) {
+    product(id: $id) {
+      id
+      title
+      description
+      featuredImage {
+        id
+        url
+      }
+    }
+  }
+`;

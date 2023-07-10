@@ -24,7 +24,6 @@ export const useProducts = ({id, quantity}: Props) => {
   }, [loading, data, products]);
 
   const fetchMore = () => {
-    console.log('=== useProducts.tsx [31] ===');
     if (loading || !products[products.length - 1]) {
       return;
     }
