@@ -17,7 +17,7 @@ interface Props
     'ProductScreen'
   > {}
 
-export const ProductScreen = ({route}: Props) => {
+export const ProductScreen = ({route, navigation}: Props) => {
   const {id} = route.params;
   const {loading, product} = useProduct({id});
   const {top} = useSafeAreaInsets();
@@ -31,7 +31,7 @@ export const ProductScreen = ({route}: Props) => {
 
   return (
     <View style={styles.container}>
-      <ItemHeader product={product} />
+      <ItemHeader product={product} navigation={navigation} />
       <ItemDetails product={product} />
     </View>
   );
