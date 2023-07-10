@@ -16,6 +16,7 @@ export const useSearchProducts = ({quantity}: Props) => {
     GET_PRODUCT_BY_TITLE,
     {
       variables: {quantity, query: 'title:**', after: null},
+      notifyOnNetworkStatusChange: true,
     },
   );
 
@@ -38,9 +39,9 @@ export const useSearchProducts = ({quantity}: Props) => {
       return;
     }
     refetch({
-      after: products[products.length - 1].cursor,
       quantity,
-      query: `title:${title}*"`,
+      query: `title:${title}*`,
+      after: products[products.length - 1].cursor,
     }).then(response => {
       setProducts(currentProducts => [
         ...currentProducts,

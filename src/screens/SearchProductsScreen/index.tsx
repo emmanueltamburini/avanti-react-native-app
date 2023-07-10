@@ -12,6 +12,7 @@ import {ProductCard} from '../../components/ProductCard';
 import {ThemeContext} from '../../context/Theme/ThemeContext';
 import {useSearchProducts} from '../../hooks/useSearchProducts';
 import {SearchInput} from '../../components/SearchInput/SearchInput';
+import {ThemeText} from '../../components/ThemeComponents/ThemeText';
 
 export const SearchProductsScreen = () => {
   const [searchTerm, setSearchTerm] = useState('');
@@ -19,7 +20,7 @@ export const SearchProductsScreen = () => {
   const styles = stylesFunction(dimensions);
   const {theme} = useContext(ThemeContext);
   const {fetch, fetchMore, loading, products} = useSearchProducts({
-    quantity: 4,
+    quantity: 5,
   });
 
   const fetchStatic = useRef(fetch);
@@ -34,9 +35,16 @@ export const SearchProductsScreen = () => {
     fetchStatic.current(searchTerm);
   }, [searchTerm]);
 
-  if (loading) {
-    return <LoadingComponent />;
-  }
+  const emptyComponent = () => {
+    if (loading) {
+      return <LoadingComponent opacity={0.5} />;
+    }
+
+    if (searchTerm === '') {
+      return;
+    }
+    return <ThemeText>There is not result for '{searchTerm}'</ThemeText>;
+  };
 
   return (
     <View style={styles.container}>
@@ -49,6 +57,7 @@ export const SearchProductsScreen = () => {
             />
           }
           data={products}
+          ListEmptyComponent={emptyComponent()}
           renderItem={({item}) => renderItem(item)}
           keyExtractor={item => item.node.id}
           onEndReached={() => fetchMore(searchTerm)}
