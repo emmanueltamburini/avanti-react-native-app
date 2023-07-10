@@ -36,7 +36,7 @@ export const CategoryCard = ({item}: Props) => {
           <FadeInImage uri={item.node.image.url} style={styles.images} />
         </View>
         <View style={styles.rightContainer}>
-          <ThemeText style={styles.name} ignoreTheme>
+          <ThemeText style={styles.name} useContrastColor>
             {item.node.title}
           </ThemeText>
         </View>

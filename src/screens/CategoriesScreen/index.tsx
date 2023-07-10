@@ -1,6 +1,5 @@
-import React, {useContext} from 'react';
-import {View, FlatList, ActivityIndicator} from 'react-native';
-import {ThemeContext} from '../../context/Theme/ThemeContext';
+import React from 'react';
+import {View, FlatList} from 'react-native';
 import {useCollection} from '../../hooks/useCollection';
 import {Edge} from '../../interfaces/collectionInterfaces';
 import {LoadingComponent} from '../../components/LoadingComponent';
@@ -10,7 +9,6 @@ import {stylesFunction} from './styles';
 
 export const CategoriesScreen = () => {
   const styles = stylesFunction();
-  const {theme} = useContext(ThemeContext);
   const {collections, fetchMore, loading} = useCollection({
     quantity: 5,
   });
@@ -32,13 +30,6 @@ export const CategoriesScreen = () => {
           onEndReachedThreshold={0.4}
           showsVerticalScrollIndicator={false}
           numColumns={1}
-          ListFooterComponent={
-            <ActivityIndicator
-              style={styles.activityIndicator}
-              size={20}
-              color={theme.opacityColor}
-            />
-          }
         />
       </View>
     </View>

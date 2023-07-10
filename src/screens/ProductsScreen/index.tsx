@@ -1,10 +1,5 @@
 import React, {useContext} from 'react';
-import {
-  View,
-  FlatList,
-  useWindowDimensions,
-  ActivityIndicator,
-} from 'react-native';
+import {View, FlatList, useWindowDimensions} from 'react-native';
 import {useProducts} from '../../hooks/useProducts';
 import {LoadingComponent} from '../../components/LoadingComponent';
 import {Edge} from '../../interfaces/productInterfaces';
@@ -59,13 +54,6 @@ export const ProductsScreen = ({route, navigation}: Props) => {
           onEndReachedThreshold={0.4}
           showsVerticalScrollIndicator={false}
           numColumns={1}
-          ListFooterComponent={
-            <ActivityIndicator
-              style={styles.activityIndicator}
-              size={20}
-              color={theme.opacityColor}
-            />
-          }
         />
       </View>
     </View>

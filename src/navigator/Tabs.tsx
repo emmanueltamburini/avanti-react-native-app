@@ -39,7 +39,7 @@ export const Tabs = () => {
         sceneContainerStyle={{backgroundColor: theme.colors.background}}
         screenOptions={{
           headerShown: false,
-          tabBarActiveTintColor: theme.colors.primary,
+          tabBarActiveTintColor: theme.colors.text,
           tabBarStyle: {
             position: 'absolute',
             backgroundColor: theme.opacityColor,

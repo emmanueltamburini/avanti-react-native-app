@@ -1,19 +1,22 @@
 import {ScaledSize, StyleSheet} from 'react-native';
+import {bigWidthScreen} from '../../helpers/utils';
 
 export const stylesFunction = (dimensions: ScaledSize) =>
   StyleSheet.create({
     container: {
       flex: 1,
-      width:
-        dimensions.width >= 650 ? dimensions.width * 0.5 : dimensions.width,
+      width: bigWidthScreen(dimensions)
+        ? dimensions.width * 0.5
+        : dimensions.width,
     },
-    absoluteFillObject:
-      dimensions.width >= 650 ? {} : {...StyleSheet.absoluteFillObject},
+    absoluteFillObject: bigWidthScreen(dimensions)
+      ? {}
+      : {...StyleSheet.absoluteFillObject},
     containerInfo: {
       marginHorizontal: 20,
     },
     topSeparator: {
-      marginTop: dimensions.width >= 650 ? 0 : 460,
+      marginTop: bigWidthScreen(dimensions) ? 0 : 420,
     },
     title: {
       marginTop: 20,

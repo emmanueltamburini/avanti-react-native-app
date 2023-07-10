@@ -31,7 +31,7 @@ export const ItemDetails = ({product}: Props) => {
           <View style={styles.listContainer}>
             <ThemeText
               style={{...styles.regularText, ...styles.rightSeparator}}>
-              {product?.totalInventory}
+              {product?.totalInventory} units
             </ThemeText>
           </View>
         </View>
@@ -40,19 +40,27 @@ export const ItemDetails = ({product}: Props) => {
         <View style={styles.containerInfo}>
           <ThemeText style={styles.title}>Variants</ThemeText>
           <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-            {product?.variants?.edges.map(item => {
-              return (
-                <View key={`variants-${item.node.image.id}`}>
-                  <FadeInImage
-                    uri={item.node.image.url}
-                    style={styles.basicVariant}
-                  />
-                  <ThemeText style={styles.smallText}>
-                    {item.node.price.currencyCode} {item.node.price.amount}
-                  </ThemeText>
-                </View>
-              );
-            })}
+            {product?.variants?.edges
+              .filter((edge, index, self) => {
+                return (
+                  self.findIndex(
+                    item => item.node.image.id === edge.node.image.id,
+                  ) === index
+                );
+              })
+              .map(item => {
+                return (
+                  <View key={`variants-${item.node.image.id}`}>
+                    <FadeInImage
+                      uri={item.node.image.url}
+                      style={styles.basicVariant}
+                    />
+                    <ThemeText style={styles.smallText}>
+                      {item.node.price.currencyCode} {item.node.price.amount}
+                    </ThemeText>
+                  </View>
+                );
+              })}
           </ScrollView>
         </View>
       )}

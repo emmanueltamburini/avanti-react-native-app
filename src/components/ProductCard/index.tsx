@@ -37,7 +37,7 @@ export const ProductCard = ({item}: Props) => {
           />
         </View>
         <View style={styles.rightContainer}>
-          <ThemeText style={styles.name} ignoreTheme>
+          <ThemeText style={styles.name} useContrastColor>
             {item.node.title}
           </ThemeText>
         </View>

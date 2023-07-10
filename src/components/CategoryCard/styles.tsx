@@ -1,5 +1,6 @@
 import {ScaledSize, StyleSheet} from 'react-native';
 import {ThemeState} from '../../context/Theme/themeReducer';
+import {bigWidthScreen} from '../../helpers/utils';
 
 export const stylesFunction = (
   windowDimension: ScaledSize,
@@ -9,8 +10,12 @@ export const stylesFunction = (
     cardContainer: {
       backgroundColor: theme.background,
       marginHorizontal: 10,
-      height: windowDimension.height * 0.2,
-      width: windowDimension.width * 0.8,
+      height: bigWidthScreen(windowDimension)
+        ? windowDimension.height * 0.5
+        : windowDimension.height * 0.2,
+      width: bigWidthScreen(windowDimension)
+        ? windowDimension.width * 0.65
+        : windowDimension.width * 0.8,
       marginBottom: 25,
       borderRadius: 20,
       shadowColor: '#000',
@@ -46,7 +51,7 @@ export const stylesFunction = (
     },
     rightContainer: {
       flex: 1,
-      backgroundColor: theme.primary,
+      backgroundColor: theme.text,
       borderTopRightRadius: 20,
       borderBottomRightRadius: 20,
     },
