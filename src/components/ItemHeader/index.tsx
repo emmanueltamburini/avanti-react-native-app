@@ -31,7 +31,7 @@ export const ItemHeader = ({product, navigation}: Props) => {
       <TouchableIcon
         activeOpacity={0.8}
         style={styles.backButton}
-        onPress={() => navigation.popToTop()}
+        onPress={() => navigation.pop()}
         name="arrow-back-outline"
         color={theme.background}
         size={35}

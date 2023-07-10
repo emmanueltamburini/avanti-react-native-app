@@ -83,6 +83,22 @@ export const GET_PRODUCT_BY_ID = gql`
       id
       title
       description
+      productType
+      totalInventory
+      variants(first: 5) {
+        edges {
+          node {
+            price {
+              amount
+              currencyCode
+            }
+            image {
+              id
+              url
+            }
+          }
+        }
+      }
       featuredImage {
         id
         url

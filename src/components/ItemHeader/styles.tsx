@@ -27,8 +27,7 @@ export const stylesFunction = (
     itemName: {
       color: theme.background,
       fontSize: 40,
-      alignSelf: 'flex-start',
-      left: bigWidthScreen(dimensions) ? 160 : 140,
+      alignSelf: 'center',
       top: top + 10,
     },
     spacer: {

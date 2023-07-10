@@ -25,7 +25,7 @@ export const ProductScreen = ({route, navigation}: Props) => {
   const {theme} = useContext(ThemeContext);
   const styles = stylesFunction(theme, top, dimensions);
 
-  if (loading) {
+  if (loading || !product) {
     return <LoadingComponent />;
   }
 
