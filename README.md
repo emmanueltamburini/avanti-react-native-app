@@ -20,3 +20,4 @@ This project use the following dependencies:
 - [React Native Vector Icons](<https://github.com/oblador/react-native-vector-icons>)
 - [Apollo Client](<https://www.npmjs.com/package/@apollo/client>)
 - [React-native-svg](<https://www.npmjs.com/package/react-native-svg>)
+- [Mock.shop API](<https://mock.shop/>)
